@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
         return tools[objName] as ObjType;
     }
 
-    public ObjType AddTool<ObjType>(string objName) where ObjType : Component {
+    private ObjType AddTool<ObjType>(string objName) where ObjType : Component {
         var tool = new GameObject(objName);
         tool.transform.SetParent(this.transform);
         ObjType obj = tool.AddComponent<ObjType>();
