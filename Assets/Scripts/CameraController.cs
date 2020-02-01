@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
     public float speedPanning;
@@ -18,9 +17,8 @@ public class CameraController : MonoBehaviour
     {
         if(gi.MouseButtonRight) {
             Vector3 mouseDelta = gi.MousePosition - prevMousePos;
-            //Debug.Log(mousePos - prevMousePos);
-            transform.Translate(-mouseDelta.x * Time.deltaTime, 0f, mouseDelta.z * Time.deltaTime);
-            prevMousePos = gi.MousePosition;
+            transform.position = transform.position - new Vector3(mouseDelta.x, 0f, mouseDelta.y) * Time.deltaTime * speedPanning;
         }
+        prevMousePos = gi.MousePosition;
     }
 }

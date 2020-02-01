@@ -14,5 +14,6 @@ public class GameInput : MonoBehaviour
         MouseButtonLeftDown = Input.GetMouseButtonDown(0);
         MouseButtonRightDown = Input.GetMouseButtonDown(1);
         MousePosition = Input.mousePosition;
+        Cursor.visible = MouseButtonRight == false;
     }
 }
