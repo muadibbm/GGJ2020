@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Camera))]
@@ -18,10 +19,16 @@ public class PlacementController : MonoBehaviour
     public LayerMask placementMask;
     public float speedRotation;
 
+    public AudioSource audioMusic;
     public AudioSource [] audioSpawnVariations;
     public AudioSource audioRotation;
     public AudioSource audioBlockedSpawn;
     public AudioSource audioComboSpawn;
+    public AudioSource audioEndCinematicMusic;
+    public CanvasGroup endCinematicFade;
+
+    public Animator sunCycle;
+    public Animator endCinematicAnim;
 
     private List<int> audioSpawnVariationsIndexList;
     private float deltaTrail;
@@ -31,14 +38,16 @@ public class PlacementController : MonoBehaviour
     private PlacementEvaluator spawned_pe;
     private Ray ray;
     private RaycastHit hit;
+    private int structureCount;
 
     private void Awake() {
         audioSpawnVariationsIndexList = new List<int>();
         gi = GameManager.Instance.GetTool<GameInput>("GameInput");
     }
 
-    private void Start() {
+    public void Init() {
         Spawn(GenerateStructure());
+        audioMusic.Play();
     }
 
     private void Update() {
@@ -56,6 +65,11 @@ public class PlacementController : MonoBehaviour
                 int index = UnityEngine.Random.Range(0, audioSpawnVariationsIndexList.Count - 1);
                 audioSpawnVariations[audioSpawnVariationsIndexList[index]].Play();
                 audioSpawnVariationsIndexList.RemoveAt(index);
+                spawned = null;
+                if (structureCount >= Constants.MAX_STRUCTURE_COUNT) {
+                    StartCoroutine(EndSequence());
+                    return;
+                }
                 Spawn(GenerateStructure());
             } else {
                 if (audioBlockedSpawn.isPlaying == false) audioBlockedSpawn.Play();
@@ -83,6 +97,7 @@ public class PlacementController : MonoBehaviour
     }
 
     private void Spawn(Structure structure) {
+        structureCount++;
         spawned = Instantiate(structure.prefab, hit.point, prevRotation);
         spawned.name = structure.prefab.name;
         spawned_pe = spawned.GetComponent<PlacementEvaluator>();
@@ -116,5 +131,30 @@ public class PlacementController : MonoBehaviour
             }
         }
         return structures[0];
+    }
+
+    private IEnumerator EndSequence() {
+        Camera.main.GetComponent<CameraController>().enabled = false;
+        audioRotation.Stop();
+        audioEndCinematicMusic.Play();
+        while (audioMusic.volume != 0) {
+            audioMusic.volume = Mathf.Clamp01(audioMusic.volume - Time.deltaTime);
+            audioEndCinematicMusic.volume = 1 - audioMusic.volume;
+            endCinematicFade.alpha = audioEndCinematicMusic.volume;
+            yield return null;
+        }
+        audioMusic.Stop();
+        endCinematicAnim.enabled = true;
+        sunCycle.enabled = true;
+        while (endCinematicFade.alpha != 0) {
+            endCinematicFade.alpha -= Time.deltaTime;
+            yield return null;
+        }
+        yield return new WaitForSeconds(20f);
+        while (endCinematicFade.alpha != 1) {
+            endCinematicFade.alpha += Time.deltaTime;
+            yield return null;
+        }
+        GameManager.RestartGame();
     }
 }

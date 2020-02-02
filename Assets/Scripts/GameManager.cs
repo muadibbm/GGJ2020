@@ -25,6 +25,14 @@ public class GameManager : MonoBehaviour {
         this.AddTool<GameInput>("GameInput");
     }
 
+    public static void RestartGame() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    public static void ExitGame() {
+        Application.Quit();
+    }
+
     public ObjType GetTool<ObjType>(string objName) where ObjType : Component {
         return tools[objName] as ObjType;
     }

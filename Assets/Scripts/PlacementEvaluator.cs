@@ -86,7 +86,13 @@ public class PlacementEvaluator : MonoBehaviour
         Destroy(triggerResource.gameObject);
         Destroy(triggerPlacement.gameObject);
         GetComponentInChildren<Collider>().enabled = true;
+        Collider[] _comboList = comboList.ToArray();
+        for (int i = 0; i < _comboList.Length; i++)
+            RemoveFromCombo(_comboList[i]);
         comboList.Clear();
+        Collider[] _blockerList = blockerList.ToArray();
+        for (int i = 0; i < _blockerList.Length; i++)
+            RemoveFromBlocker(_blockerList[i]);
         blockerList.Clear();
     }
 }
