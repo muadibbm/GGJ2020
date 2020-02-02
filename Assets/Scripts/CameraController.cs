@@ -4,6 +4,7 @@
 public class CameraController : MonoBehaviour
 {
     public float speedPanning;
+    public Vector2 boundsPanning;
 
     private GameInput gi;
     private Vector3 prevMousePos;
@@ -17,7 +18,9 @@ public class CameraController : MonoBehaviour
     {
         if(gi.MouseButtonRight) {
             Vector3 mouseDelta = gi.MousePosition - prevMousePos;
-            transform.position = transform.position - new Vector3(mouseDelta.x, 0f, mouseDelta.y) * Time.deltaTime * speedPanning;
+            Vector3 nextPos = transform.position - new Vector3(mouseDelta.x, 0f, mouseDelta.y) * Time.deltaTime * speedPanning;
+            if (Mathf.Abs(nextPos.x) < boundsPanning.x && Mathf.Abs(nextPos.z) < boundsPanning.y)
+                transform.position = nextPos;
         }
         prevMousePos = gi.MousePosition;
     }

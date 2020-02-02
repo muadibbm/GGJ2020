@@ -29,8 +29,9 @@ public class PlacementEvaluator : MonoBehaviour
 
     public string [] GetComboResourcesNames() {
         string[] names = new string[comboList.Count];
-        for (int i = 0; i < comboList.Count; i++)
+        for (int i = 0; i < comboList.Count; i++) {
             names[i] = comboList[i].transform.parent.name;
+        }
         return names;
     }
 

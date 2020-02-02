@@ -8,7 +8,6 @@ public class PlacementController : MonoBehaviour
     public struct Structure {
         public GameObject prefab;
         public float cost;
-        public float baseResource;
         public float comboResource;
         public float probablity;
     }
@@ -35,7 +34,7 @@ public class PlacementController : MonoBehaviour
     }
 
     private void Start() {
-        Spawn(structures[0], false);
+        Spawn(GenerateStructure());
     }
 
     private void Update() {
@@ -46,11 +45,13 @@ public class PlacementController : MonoBehaviour
             if(spawned_pe.EvaluatePlacement()) {
                 UpdateResources();
                 Destroy(spawned_pe);
-                Spawn(structures[0]); // TODO TESTRIS
+                audioSpawnVariations[UnityEngine.Random.Range(0, audioSpawnVariations.Length - 1)].Play();
+                Spawn(GenerateStructure());
             } else {
                 if (audioBlockedSpawn.isPlaying == false) audioBlockedSpawn.Play();
             }
         }
+        currentResource = Mathf.Clamp(currentResource, 0f, Mathf.Infinity);
     }
 
     private void ApplyPosition() {
@@ -70,13 +71,12 @@ public class PlacementController : MonoBehaviour
         }
     }
 
-    private void Spawn(Structure structure, bool playAudio = true) {
+    private void Spawn(Structure structure) {
         spawned = Instantiate(structure.prefab, hit.point, prevRotation);
+        spawned.name = structure.prefab.name;
         spawned_pe = spawned.GetComponent<PlacementEvaluator>();
         Utility.SetMaterialsColor(spawned_pe.clearColor, spawned.GetComponentsInChildren<Renderer>());
-        if (playAudio) {
-            audioSpawnVariations[UnityEngine.Random.Range(0, audioSpawnVariations.Length - 1)].Play();
-        }
+        currentResource -= structure.cost;
     }
 
     private void UpdateResources() {
@@ -87,19 +87,23 @@ public class PlacementController : MonoBehaviour
                 if(structures[0].prefab.name == names[j]) {
                     currentResource += structures[0].comboResource;
                     hasCombo = true;
-                    break;
                 }
             }
         }
         if(hasCombo) {
             if (audioComboSpawn.isPlaying == false) audioComboSpawn.Play();
         }
-        for (int i = 0; i < structures.Length; i++) {
-            if (structures[0].prefab.name == spawned_pe.name) {
-                currentResource -= structures[0].cost;
-                currentResource += structures[0].baseResource;
-                break;
+        currentResource = Mathf.Clamp(currentResource, 0f, Mathf.Infinity);
+    }
+
+    private Structure GenerateStructure() {
+        for(int i = structures.Length - 1; i > 0; i--) {
+            if(structures[i].cost <= currentResource) {
+                if(UnityEngine.Random.Range(0, 1f) <= structures[i].probablity) {
+                    return structures[i];
+                }
             }
         }
+        return structures[0];
     }
 }
