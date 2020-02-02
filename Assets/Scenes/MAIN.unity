@@ -969,29 +969,34 @@ MonoBehaviour:
     probablity: 1
   - prefab: {fileID: 8503913913394360534, guid: 8bef07bf7c5b5c744aa5706bb82ad597,
       type: 3}
-    cost: 3
+    cost: 2
     comboResource: 1.5
     probablity: 0.5
   - prefab: {fileID: 8503913913394360534, guid: 9d5a9b31fba87e84cbc61dd052607609,
       type: 3}
-    cost: 3
-    comboResource: 1.5
-    probablity: 0.5
+    cost: 8
+    comboResource: 4
+    probablity: 0.2
   - prefab: {fileID: 8503913913394360534, guid: e312679ea1009b4458fbbcd8fa903401,
       type: 3}
     cost: 8
     comboResource: 4
-    probablity: 0.25
+    probablity: 0.2
   - prefab: {fileID: 8503913913394360534, guid: 397ca5c2c862cd1478687d89593bc56c,
       type: 3}
     cost: 8
     comboResource: 4
-    probablity: 0.25
+    probablity: 0.2
+  - prefab: {fileID: 8503913913394360534, guid: 63d46bc33377ea441b1e9634e6d6684d,
+      type: 3}
+    cost: 10
+    comboResource: 6
+    probablity: 0.1
   - prefab: {fileID: 8503913913394360534, guid: 86ca934afa20a0f43b3f14379ae082fa,
       type: 3}
-    cost: 20
+    cost: 16
     comboResource: 10
-    probablity: 1
+    probablity: 0.8
   placementMask:
     serializedVersion: 2
     m_Bits: 512

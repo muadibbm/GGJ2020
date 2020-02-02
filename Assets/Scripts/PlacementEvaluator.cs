@@ -10,10 +10,16 @@ public class PlacementEvaluator : MonoBehaviour
     public Color comboColor;
     public Color clearColor;
 
+    private ParticleSystem[] vfx;
+
     private List<Collider> comboList;
     private List<Collider> blockerList;
 
+    private Collider self;
+
     private void Awake() {
+        self = GetComponentInChildren<Collider>();
+        vfx = GetComponentsInChildren<ParticleSystem>();
         blockerList = new List<Collider>();
         comboList = new List<Collider>();
         triggerPlacement.onEnter = AddToBlocker;
@@ -24,12 +30,15 @@ public class PlacementEvaluator : MonoBehaviour
 
     public bool EvaluatePlacement() {
         if (blockerList.Count != 0) return false;
+        for (int i = 0; i < vfx.Length; i++)
+            vfx[i].Play();
         return true;
     }
 
     public string [] GetComboResourcesNames() {
         string[] names = new string[comboList.Count];
         for (int i = 0; i < comboList.Count; i++) {
+            if (comboList[i] == self) continue;
             names[i] = comboList[i].transform.parent.name;
         }
         return names;

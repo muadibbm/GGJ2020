@@ -13,8 +13,6 @@ public class PlacementController : MonoBehaviour
         public float probablity;
     }
 
-    public GameObject vfx_placement_large;
-
     public float currentResource;
     public Structure [] structures;
     public LayerMask placementMask;
@@ -49,7 +47,6 @@ public class PlacementController : MonoBehaviour
         ApplyRotation();
         if (gi.MouseButtonLeftDown) {
             if(spawned_pe.EvaluatePlacement()) {
-                Instantiate(vfx_placement_large, spawned.transform.position, prevRotation);
                 UpdateResources();
                 Destroy(spawned_pe);
                 if(audioSpawnVariationsIndexList.Count == 0) {
