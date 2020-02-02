@@ -9,6 +9,10 @@ public class GameInput : MonoBehaviour
     public Vector3 MousePosition { get; private set; }
     public Vector2 MouseScrollDelta { get; private set; }
 
+    private void Awake() {
+        Cursor.visible = false;
+    }
+
     private void Update() {
         MouseButtonLeft = Input.GetMouseButton(0);
         MouseButtonRight = Input.GetMouseButton(1);
@@ -16,6 +20,6 @@ public class GameInput : MonoBehaviour
         MouseButtonRightDown = Input.GetMouseButtonDown(1);
         MousePosition = Input.mousePosition;
         MouseScrollDelta = Input.mouseScrollDelta;
-        Cursor.visible = MouseButtonRight == false;
+        if(Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Camera))]
 public class PlacementController : MonoBehaviour
@@ -12,6 +13,8 @@ public class PlacementController : MonoBehaviour
         public float probablity;
     }
 
+    public GameObject vfx_placement_large;
+
     public float currentResource;
     public Structure [] structures;
     public LayerMask placementMask;
@@ -22,6 +25,8 @@ public class PlacementController : MonoBehaviour
     public AudioSource audioBlockedSpawn;
     public AudioSource audioComboSpawn;
 
+    private List<int> audioSpawnVariationsIndexList;
+    private float deltaTrail;
     private Quaternion prevRotation;
     private GameInput gi;
     private GameObject spawned;
@@ -30,6 +35,7 @@ public class PlacementController : MonoBehaviour
     private RaycastHit hit;
 
     private void Awake() {
+        audioSpawnVariationsIndexList = new List<int>();
         gi = GameManager.Instance.GetTool<GameInput>("GameInput");
     }
 
@@ -43,9 +49,16 @@ public class PlacementController : MonoBehaviour
         ApplyRotation();
         if (gi.MouseButtonLeftDown) {
             if(spawned_pe.EvaluatePlacement()) {
+                Instantiate(vfx_placement_large, spawned.transform.position, prevRotation);
                 UpdateResources();
                 Destroy(spawned_pe);
-                audioSpawnVariations[UnityEngine.Random.Range(0, audioSpawnVariations.Length - 1)].Play();
+                if(audioSpawnVariationsIndexList.Count == 0) {
+                    for (int i = 0; i < audioSpawnVariations.Length; i++)
+                        audioSpawnVariationsIndexList.Add(i);
+                }
+                int index = UnityEngine.Random.Range(0, audioSpawnVariationsIndexList.Count - 1);
+                audioSpawnVariations[audioSpawnVariationsIndexList[index]].Play();
+                audioSpawnVariationsIndexList.RemoveAt(index);
                 Spawn(GenerateStructure());
             } else {
                 if (audioBlockedSpawn.isPlaying == false) audioBlockedSpawn.Play();
@@ -64,11 +77,12 @@ public class PlacementController : MonoBehaviour
     private void ApplyRotation() {
         spawned.transform.Rotate(Vector3.up, gi.MouseScrollDelta.y * speedRotation);
         prevRotation = spawned.transform.rotation;
-        if (gi.MouseScrollDelta.y == 0f) {
-            audioRotation.Stop();
+        if(gi.MouseScrollDelta.y == 0f) {
+            deltaTrail = Mathf.Clamp01(deltaTrail - Time.deltaTime);
         } else {
-            if (audioRotation.isPlaying == false) audioRotation.Play();
+            deltaTrail = 1f;
         }
+        audioRotation.volume = deltaTrail;
     }
 
     private void Spawn(Structure structure) {
@@ -81,18 +95,18 @@ public class PlacementController : MonoBehaviour
 
     private void UpdateResources() {
         string [] names = spawned_pe.GetComboResourcesNames();
-        bool hasCombo = false;
+        //bool hasCombo = false;
         for(int i = 0; i < structures.Length; i++) {
             for(int j = 0; j < names.Length; j++) {
                 if(structures[0].prefab.name == names[j]) {
                     currentResource += structures[0].comboResource;
-                    hasCombo = true;
+                    //hasCombo = true;
                 }
             }
         }
-        if(hasCombo) {
-            if (audioComboSpawn.isPlaying == false) audioComboSpawn.Play();
-        }
+        //if(hasCombo) {
+        //    if (audioComboSpawn.isPlaying == false) audioComboSpawn.Play();
+        //}
         currentResource = Mathf.Clamp(currentResource, 0f, Mathf.Infinity);
     }
 
