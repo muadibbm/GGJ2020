@@ -1334,27 +1334,27 @@ MonoBehaviour:
       type: 3}
     cost: 16
     comboResource: 10
-    probablity: 0.7
+    probablity: 0.6
   - prefab: {fileID: 8503913913394360534, guid: 95596985e2433bc42a4dd03be3156b8a,
       type: 3}
     cost: 25
     comboResource: 15
-    probablity: 0.6
+    probablity: 0.5
   - prefab: {fileID: 8503913913394360534, guid: d415555cb4913d8468de084f6de78e93,
       type: 3}
     cost: 25
     comboResource: 20
-    probablity: 0.5
+    probablity: 0.4
   - prefab: {fileID: 8503913913394360534, guid: d5076843a32e3a744a014c1206e82b4f,
       type: 3}
     cost: 30
     comboResource: 25
-    probablity: 0.4
+    probablity: 0.2
   - prefab: {fileID: 8503913913394360534, guid: b24aafe810213f1448deb6c909eda939,
       type: 3}
     cost: 30
     comboResource: 30
-    probablity: 0.3
+    probablity: 0.15
   placementMask:
     serializedVersion: 2
     m_Bits: 512
@@ -2493,7 +2493,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: This game is dedicated to all the victims who lost their lives in the Ukraine
-    International Flight PS752 shot down by Iran's revolutionary guard
+    International Flight PS752 crash
 --- !u!222 &1438224322
 CanvasRenderer:
   m_ObjectHideFlags: 0
