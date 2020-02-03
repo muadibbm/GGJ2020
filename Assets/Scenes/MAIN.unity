@@ -715,8 +715,8 @@ RectTransform:
   m_Children:
   - {fileID: 809287158}
   - {fileID: 2091225203}
-  - {fileID: 1911633606}
   - {fileID: 676924171}
+  - {fileID: 1911633606}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1314,12 +1314,12 @@ MonoBehaviour:
       type: 3}
     cost: 8
     comboResource: 4
-    probablity: 0.2
+    probablity: 0.25
   - prefab: {fileID: 8503913913394360534, guid: 397ca5c2c862cd1478687d89593bc56c,
       type: 3}
     cost: 8
     comboResource: 4
-    probablity: 0.2
+    probablity: 0.25
   - prefab: {fileID: 8503913913394360534, guid: 63d46bc33377ea441b1e9634e6d6684d,
       type: 3}
     cost: 10
@@ -1330,6 +1330,31 @@ MonoBehaviour:
     cost: 16
     comboResource: 10
     probablity: 0.8
+  - prefab: {fileID: 8503913913394360534, guid: 64b365248ac2df246b9fce660ccfe984,
+      type: 3}
+    cost: 16
+    comboResource: 10
+    probablity: 0.7
+  - prefab: {fileID: 8503913913394360534, guid: 95596985e2433bc42a4dd03be3156b8a,
+      type: 3}
+    cost: 25
+    comboResource: 15
+    probablity: 0.6
+  - prefab: {fileID: 8503913913394360534, guid: d415555cb4913d8468de084f6de78e93,
+      type: 3}
+    cost: 25
+    comboResource: 20
+    probablity: 0.5
+  - prefab: {fileID: 8503913913394360534, guid: d5076843a32e3a744a014c1206e82b4f,
+      type: 3}
+    cost: 30
+    comboResource: 25
+    probablity: 0.4
+  - prefab: {fileID: 8503913913394360534, guid: b24aafe810213f1448deb6c909eda939,
+      type: 3}
+    cost: 30
+    comboResource: 30
+    probablity: 0.3
   placementMask:
     serializedVersion: 2
     m_Bits: 512
@@ -1437,9 +1462,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 807840673}
+  - {fileID: 1134604190}
   - {fileID: 1443755073}
   m_Father: {fileID: 329663916}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1478,7 +1504,7 @@ GameObject:
   - component: {fileID: 807840676}
   - component: {fileID: 807840675}
   m_Layer: 5
-  m_Name: Introduction
+  m_Name: Schema (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1500,8 +1526,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1375.2, y: 111.6}
+  m_AnchoredPosition: {x: -427, y: -36.4}
+  m_SizeDelta: {x: 728.3, y: 627.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &807840675
 MonoBehaviour:
@@ -1523,18 +1549,24 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 39
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 0
     m_MaxSize: 161
-    m_Alignment: 4
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: controls screen
+  m_Text: 'Right Mouse Click and Drag
+
+
+    Mouse Scroll
+
+
+    Left Mouse Click'
 --- !u!222 &807840676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2006,6 +2038,89 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051667606}
   m_CullTransparentMesh: 0
+--- !u!1 &1134604189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1134604190}
+  - component: {fileID: 1134604192}
+  - component: {fileID: 1134604191}
+  m_Layer: 5
+  m_Name: Schema (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1134604190
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134604189}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 676924171}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 426, y: -36.4}
+  m_SizeDelta: {x: 462.5, y: 627.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1134604191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134604189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 161
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Move Camera
+
+
+    Rotate Structure
+
+
+    Place Structure'
+--- !u!222 &1134604192
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134604189}
+  m_CullTransparentMesh: 0
 --- !u!1 &1245991598
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,8 +2492,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This game is dedicated to all those who lost their lives in the Ukraine
-    International Airlines Flight PS752 crash
+  m_Text: This game is dedicated to all the victims who lost their lives in the Ukraine
+    International Flight PS752 shot down by Iran's revolutionary guard
 --- !u!222 &1438224322
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2418,7 +2533,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 676924171}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2587,11 +2702,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c1f12912c7bb9fe4a9e5e105e65db53c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b655ed8af8f97a9458b58dd0c5ddf6bf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2785,7 +2900,7 @@ RectTransform:
   - {fileID: 1438224319}
   - {fileID: 334813580}
   m_Father: {fileID: 329663916}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

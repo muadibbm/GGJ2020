@@ -9,7 +9,12 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: LP_Col_Top
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Col_Top
+    second: {fileID: 2100000, guid: b6f7b5e79b1a73b43abc11a18466dbac, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

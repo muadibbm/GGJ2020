@@ -150,7 +150,7 @@ public class PlacementController : MonoBehaviour
             endCinematicFade.alpha -= Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(27f);
         while (endCinematicFade.alpha != 1) {
             endCinematicFade.alpha += Time.deltaTime;
             yield return null;
